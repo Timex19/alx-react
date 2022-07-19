@@ -27,16 +27,23 @@ describe('<App />', () => {
     expect(wrapper.find('Footer')).toHaveLength(1);
   });
 
-  it('CourseList with isLoggedIn false', () => {
+  it('CourseList', () => {
     const wrapper = shallow(<App />);
-    wrapper.update();
     expect(wrapper.find('CourseList')).toHaveLength(0);
   });
 
-  it('isLoggedIn is true', () => {
+  it('isLoggedIn true', () => {
     const wrapper = shallow(<App isLoggedIn />);
-    wrapper.update();
     expect(wrapper.find('Login')).toHaveLength(0);
     expect(wrapper.find('CourseList')).toHaveLength(1);
+  });
+
+  it('logOut', () => {
+    const logOut = jest.fn(() => undefined);
+    const wrapper = shallow(<App logOut={logOut} />);
+    const alert = jest.spyOn(global, 'alert');
+    expect(alert);
+    expect(logOut);
+    jest.restoreAllMocks();
   });
 });
